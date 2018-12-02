@@ -17,7 +17,7 @@ public class Cyclist implements Serializable {
     @Column(name = "cyclist_id", nullable = false)
     private int cyclist_id;
 
-    @ManyToOne(targetEntity = com.entity.Team.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = com.entity.Team.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
 
@@ -53,8 +53,8 @@ public class Cyclist implements Serializable {
         this.cyclist_age = cyclist_age;
     }
 
-    public Cyclist(int team_id, String cyclist_name, int cyclist_age) {
-        //this.team_id = team_id;
+    public Cyclist(Team team, String cyclist_name, int cyclist_age) {
+        this.team = team;
         this.cyclist_name = cyclist_name;
         this.cyclist_age = cyclist_age;
     }

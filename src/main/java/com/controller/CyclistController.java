@@ -5,6 +5,7 @@ import com.dao.TeamDAO;
 import com.dao.impl.CyclistDAOimpl;
 import com.dao.impl.TeamDAOimpl;
 import com.entity.Cyclist;
+import com.entity.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,9 +26,7 @@ public class CyclistController {
 
     @RequestMapping(value = "/cyclists", method = RequestMethod.GET)
     public String getCyclistsPage(Model model){
-        TeamDAO teamDAO = new TeamDAOimpl();
         model.addAttribute("cyclists",cyclistDAOimpl.getCyclists());
-        model.addAttribute("teamDAO",teamDAO);
         return "cyclists";
     }
 
@@ -42,15 +42,22 @@ public class CyclistController {
 
     @RequestMapping("/addCyclist")
     public ModelAndView showAddForm(){
-        return new ModelAndView("addTeam","command", new Cyclist());
+        TeamDAO teamDAO = new TeamDAOimpl();
+        ModelAndView model = new ModelAndView("addCyclist","command", new Cyclist());
+        model.addObject("teams",teamDAO.getTeams());
+        return model;
     }
 
-    @RequestMapping(value = "/saveCyclist", method = RequestMethod.POST, params = {"team_name", "team_country"})
+    @RequestMapping(value = "/saveCyclist", method = RequestMethod.POST, params = {"cyclist_name", "teamSelector", "cyclist_age"})
     @ResponseBody
-    public ModelAndView addTeamPage(@RequestParam(value = "team_name") String team_name,
-                                    @RequestParam(value = "team_country") String team_country) {
+    public ModelAndView addCyclistPage(@RequestParam(value = "cyclist_name") String cyclist_name,
+                                    @RequestParam(value = "teamSelector") String team_name,
+                                    @RequestParam(value = "cyclist_age") int cyclist_age) {
+        Team team;
+        TeamDAO teamDAO = new TeamDAOimpl();
+        team = teamDAO.getTeam(team_name);
         CyclistDAO cyclistDAO = new CyclistDAOimpl();
-        //teamDAO.createTeam(team_name,team_country);
+        cyclistDAO.createCyclist(team,cyclist_name,cyclist_age);
         ModelAndView model = new ModelAndView("cyclists");
         model.addObject("cyclists", cyclistDAO.getCyclists());
         return model;

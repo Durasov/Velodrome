@@ -20,7 +20,7 @@
     <nav class="nav_item">
         <ul class="nav_ul">
             <li class="nav_li">
-                <a href="/index.jsp" class="nav_link nav_link1"> News </a>
+                <a href="/index" class="nav_link nav_link1"> News </a>
             </li>
             <li class="nav_li">
                 <a href="/teams" class="nav_link nav_link2"> Teams </a>
@@ -39,7 +39,7 @@
 </header>
 
 <div class="description">
-    <form:form action="save" method="post" class="form">
+    <form:form action="saveTeam" method="post" class="form">
         <h2>Add Team</h2>
         <p class="add_description">Team name </p>
         <input name="team_name" type="text" required placeholder="Team Name" class="textbox"> </br>

@@ -1,4 +1,4 @@
-package com.controller.teams;
+package com.controller;
 
 import com.dao.TeamDAO;
 import com.dao.impl.TeamDAOimpl;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class TeamListController {
+public class TeamController {
 
     @Autowired
     TeamDAOimpl teamDAOimpl;
@@ -41,7 +41,7 @@ public class TeamListController {
         return new ModelAndView("addTeam","command", new Team());
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST, params = {"team_name", "team_country"})
+    @RequestMapping(value = "/saveTeam", method = RequestMethod.POST, params = {"team_name", "team_country"})
     @ResponseBody
     public ModelAndView addTeamPage(@RequestParam(value = "team_name") String team_name,
                                     @RequestParam(value = "team_country") String team_country){

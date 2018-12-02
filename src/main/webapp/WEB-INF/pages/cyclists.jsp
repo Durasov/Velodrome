@@ -51,7 +51,7 @@
     <tr>
         <td>${cyclist.cyclistName}
         </td>
-        <td>${teamDAO.getTeam(cyclist.getTeamName()).teamName}
+        <td>${cyclist.getTeam().getTeamName()}
         </td>
         <td>${cyclist.cyclistAge}
         </td>

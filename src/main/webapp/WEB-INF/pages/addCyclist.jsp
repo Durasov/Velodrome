@@ -21,7 +21,7 @@
     <nav class="nav_item">
         <ul class="nav_ul">
             <li class="nav_li">
-                <a href="/index.jsp" class="nav_link nav_link1"> News </a>
+                <a href="/index" class="nav_link nav_link1"> News </a>
             </li>
             <li class="nav_li">
                 <a href="/teams" class="nav_link nav_link2"> Teams </a>
@@ -42,8 +42,8 @@
 <div class="description">
     <form:form action="saveCyclist" method="post" class="form">
         <h2>Add Cyclist</h2>
-        <p class="add_description">Cyclist id</p>
-        <input name="cyclist_id" type="number" required placeholder="0" class="textbox"> </br>
+        <p class="add_description">Cyclist name</p>
+        <input name="cyclist_name" type="text" required placeholder="Cyclist Name" class="textbox"> </br>
         <p class="add_description">Team</p>
         <select name="teamSelector" class="add_select">
             <option>${playersTeam.teamName}</option>
@@ -51,8 +51,6 @@
                 <option>${team.teamName}</option>
             </c:forEach>
         </select>
-        <p class="add_description">Cyclist name</p>
-        <input name="cyclist_name" type="text" required placeholder="Cyclist Name" class="textbox"> </br>
         <p class="add_description">Cyclist age</p>
         <input name="cyclist_age" type="number" required placeholder="0" class="textbox"> </br>
         <input type="submit" value="Add cyclist" class="button"/>

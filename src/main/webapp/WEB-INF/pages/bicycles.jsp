@@ -20,7 +20,7 @@
     <nav class="nav_item">
         <ul class="nav_ul">
             <li class="nav_li">
-                <a href="/index.jsp" class="nav_link nav_link1"> News </a>
+                <a href="/index" class="nav_link nav_link1"> News </a>
             </li>
             <li class="nav_li">
                 <a href="/teams" class="nav_link nav_link2"> Teams </a>

@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 30.11.2018
-  Time: 12:33
+  Date: 02.12.2018
+  Time: 16:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Velodrome results</title>
+    <title>Add Bicycle</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
     <link rel="stylesheet" type="text/css" href="resources/style2.css"/>
 </head>
@@ -38,37 +38,25 @@
     </nav>
 </header>
 
-<table class="table" align="center">
-    <thead>
-    <th>Cyclist name</th>
-    <th>Cyclist team</th>
-    <th>Race type</th>
-    <th>Result place</th>
-    <th></th>
-    <th></th>
-    </thead>
-    <tbody>
-    <c:forEach items="${results}" var="result">
-    <tr>
-        <td>${cyclistDao.getCyclist(result.getCyclistId()).getCyclistName()}
-        </td>
-        <td>${teamDao.getTeam(result.getTeamId()).getTeamName()}
-        </td>
-        <td>${result.raceType}
-        </td>
-        <td>${result.resultPlace}
-        </td>
-        <td><a href="/editResult?resultId=${result.resultId}">Edit</a></td>
-        <td><a href="/deleteResult?resultId=${result.resultId}">Delete</a></td>
-    </tr>
-    </tbody>
-    </c:forEach>
-</table>
 <div class="description">
-    <c:forEach items="${results}" var="result" begin="0" end="0">
-        <a href="/addResult?resultId=${result.resultId}" class="add_button">Add result</a>
-    </c:forEach>
+    <form action="saveBicycle" method="post" class="form">
+        <h2>Add Bicycle</h2>
+        <p class="add_description">Cyclist</p>
+        <select name="cyclistSelector" class="add_select">
+            <option>${bicycleCyclist.cyclistName}</option>
+            <c:forEach items="${cyclists}" var="cyclist">
+                <option>${cyclist.cyclistName}</option>
+            </c:forEach>
+        </select>
+        <p class="add_description">Model</p>
+        <input name="bicycle_name" type="text" required placeholder="Model" class="textbox"> </br>
+        <p class="add_description">Material</p>
+        <input name="bicycle_material" type="text" required placeholder="Material" class="textbox"> </br>
+        <p class="add_description">Weight </p>
+        <input name="bicycle_weight" type="number" placeholder="0" class="textbox"> </br>
+        <input type="submit" value="Add bicycle" class="button"/>
+        <a href="/bicycles" class="cancel">Cancel</a>
+    </form>
 </div>
-</form>
 </body>
 </html>
