@@ -1,0 +1,184 @@
+body{
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #8F8F8F;
+}
+
+a:visited {
+    color: #8F8F8F; /* Цвет посещенных ссылок */
+}
+
+/* Стили для header */
+.header{
+    height: 120px;
+    background-image: url('//resources/img/Deep Space.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header_logo{
+    text-align: center;
+    color: #757575;
+    font-size: 45px;
+    margin: 0;
+}
+
+.nav_ul{
+    display: flex;
+}
+
+.nav_li{
+    list-style: none;
+    color: #8F8F8F;
+    font-size: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*===============================*/
+
+/* Стили для main */
+.main{
+    width: 1280px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.news1_img{
+    max-width: 260px;
+    max-height: 370px;
+    float: left;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+.news_ul{
+    display: flex;
+    list-style: none;
+}
+
+.news_text{
+    max-width: 260px;
+    margin-left: 50px;
+    font-size: 15px;
+    line-height: 1.55;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+}
+/*===============================*/
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 17px;
+    margin-top: 50px;
+    border-radius: 10px;
+    border-spacing: 0;
+    text-align: center;
+}
+
+th {
+    background: #3B3B3B;
+    color: white;
+    text-shadow: 0 1px 1px #2D2020;
+    padding: 10px 20px;
+}
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+th:first-child, td:first-child {
+    text-align: left;
+}
+th:first-child {
+    border-top-left-radius: 10px;
+}
+th:last-child {
+    border-top-right-radius: 10px;
+    border-right: none;
+}
+td {
+    padding: 10px 20px;
+    background: #F8E391;
+    color: #8F8F8F;
+}
+tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+tr td:last-child {
+    border-right: none;
+}
+
+.add_button{
+    color:#8F8F8F;
+    padding: 10px 20px;
+    width:100px;
+    text-decoration:none;
+    text-align:center;
+    margin:20px auto;
+    display: block;
+    background-image: linear-gradient(to left,transparent,transparent 50%,#00c6ff 50%,#00c6ff);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+    font: 400 18px tahoma;
+    border: 1px solid #8F8F8F;
+}
+
+.form{
+    width:340px;
+    height:auto;
+    background:#3B3B3B;
+    border-radius:8px;
+    box-shadow:0 0 40px -10px #000;
+    margin:calc(50vh - 220px) auto;
+    padding:20px 30px;
+    max-width:calc(100vw - 40px);
+    box-sizing:border-box;
+    font-family:'Montserrat',sans-serif;
+    position:relative
+}
+
+h2{
+    margin:10px 0;
+    margin-bottom: 20px;
+    padding-bottom:10px;
+    width:180px;
+    color: white;
+    border-bottom:3px solid white;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom: 20px;
+    box-sizing:border-box;
+    background:none;
+    outline:none;
+    resize:none;
+    border:0;
+    font-family:'Montserrat',sans-serif;
+    transition:all .3s;
+    border-bottom:2px solid white;
+}
+
+input:focus{
+    border-bottom:2px solid #78788c
+}
+
+.button{
+    padding:8px 12px;
+    margin:8px 0 0;
+    margin-bottom: 30px;
+    font-family:'Montserrat',sans-serif;
+    border:2px solid #78788c;
+    font-size: 17px;
+    color: white;
+    background:0;
+    cursor:pointer;
+    transition:all .3s
+}
