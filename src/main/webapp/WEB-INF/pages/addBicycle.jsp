@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
     <title>Add Bicycle</title>
@@ -39,7 +40,7 @@
 </header>
 
 <div class="description">
-    <form action="saveBicycle" method="post" class="form">
+    <form:form action="saveBicycle" method="post" class="form">
         <h2>Add Bicycle</h2>
         <p class="add_description">Cyclist</p>
         <select name="cyclistSelector" class="add_select">
@@ -56,7 +57,7 @@
         <input name="bicycle_weight" type="number" placeholder="0" class="textbox"> </br>
         <input type="submit" value="Add bicycle" class="button"/>
         <a href="/bicycles" class="cancel">Cancel</a>
-    </form>
+    </form:form>
 </div>
 </body>
 </html>

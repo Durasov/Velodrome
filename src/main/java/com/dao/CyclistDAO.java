@@ -11,6 +11,8 @@ public interface CyclistDAO {
 
     public void deleteCyclist(int cyclist_id);
 
+    public void updateCyclist(Cyclist cyclist);
+
     public List<Cyclist> getCyclists();
 
 }

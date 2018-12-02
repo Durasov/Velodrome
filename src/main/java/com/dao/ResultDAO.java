@@ -10,6 +10,8 @@ public interface ResultDAO {
 
     public void deleteResult(int result_id);
 
+    public void updateResult(Result result);
+
     public List<Result> getResults();
 
 }

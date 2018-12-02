@@ -47,18 +47,19 @@ public class BicycleController {
         return model;
     }
 
-    @RequestMapping(value = "/saveBicycle", method = RequestMethod.POST, params = {"cyclist_name", "teamSelector", "cyclist_age"})
+    @RequestMapping(value = "/saveBicycle", method = RequestMethod.POST, params = {"cyclistSelector", "bicycle_name", "bicycle_material", "bicycle_weight"})
     @ResponseBody
-    public ModelAndView addBicyclePage(@RequestParam(value = "cyclist_name") String cyclist_name,
-                                    @RequestParam(value = "teamSelector") String team_name,
-                                    @RequestParam(value = "cyclist_age") int cyclist_age) {
+    public ModelAndView addBicyclePage(@RequestParam(value = "cyclistSelector") String cyclist_name,
+                                       @RequestParam(value = "bicycle_name") String bicycle_name,
+                                       @RequestParam(value = "bicycle_material") String bicycle_material,
+                                       @RequestParam(value = "bicycle_weight") byte bicycle_weight) {
         Cyclist cyclist;
         CyclistDAO cyclistDAO = new CyclistDAOimpl();
-        //cyclist = cyclistDAO.getTeam(team_name);
+        cyclist = ((CyclistDAOimpl) cyclistDAO).getCyclist(cyclist_name);
         BicycleDAO bicycleDAO = new BicycleDAOimpl();
-        //bicycleDAO.createBicycle(team.getTeamId(),cyclist_name,cyclist_age);
-        ModelAndView model = new ModelAndView("cyclists");
-        model.addObject("cyclists", cyclistDAO.getCyclists());
+        bicycleDAO.createBicycle(cyclist,bicycle_name,bicycle_material,bicycle_weight);
+        ModelAndView model = new ModelAndView("bicycles");
+        model.addObject("bicycles", bicycleDAO.getBicycles());
         return model;
     }
 

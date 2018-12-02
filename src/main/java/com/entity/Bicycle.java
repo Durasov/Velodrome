@@ -5,7 +5,8 @@ import org.apache.openjpa.persistence.jdbc.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "bicycle")
+@Entity
+@Table(name = "bicycle")
 //@Table(name = "bicycle", schema = "public", catalog = "Velodrome")
 public class Bicycle implements Serializable {
 
@@ -14,7 +15,7 @@ public class Bicycle implements Serializable {
     @Column(name = "bicycle_id", nullable = false)
     private int bicycle_id;
 
-    @ManyToOne(targetEntity = com.entity.Cyclist.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = com.entity.Cyclist.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "cyclist_id", referencedColumnName = "cyclist_id")
     private Cyclist cyclist;
 

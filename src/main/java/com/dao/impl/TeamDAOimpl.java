@@ -45,6 +45,20 @@ public class TeamDAOimpl implements TeamDAO {
         }
     }
 
+    public void updateTeam(Team team){
+        ORMHelper.openSession();
+        try {
+            ORMHelper.beginTransaction();
+            ORMHelper.update(team);
+            ORMHelper.commitTransaction();
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
+    }
+
     public List<Team> getTeams(){
         ORMHelper.openSession();
         List<Team> teams = new ArrayList<>();
@@ -72,6 +86,28 @@ public class TeamDAOimpl implements TeamDAO {
             Team team;
             Query query = ORMHelper.getCurrentSession().createQuery("SELECT t FROM Team t where t.team_name LIKE: param")
                     .setParameter("param",teamName);
+            teams = query.getResultList();
+            String team_name = teams.get(0).getTeamName();
+            String team_country = teams.get(0).getTeamCountry();
+            team = new Team(team_name,team_country);
+            ORMHelper.commitTransaction();
+            return team;
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
+    }
+
+    public Team getTeam(int team_id){
+        ORMHelper.openSession();
+        List<Team> teams = new ArrayList<>();
+        try {
+            ORMHelper.beginTransaction();
+            Team team;
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT t FROM Team t where t.team_id =: param")
+                    .setParameter("param",team_id);
             teams = query.getResultList();
             String team_name = teams.get(0).getTeamName();
             String team_country = teams.get(0).getTeamCountry();

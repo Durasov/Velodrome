@@ -1,15 +1,13 @@
 package com.entity;
 
-import org.apache.openjpa.persistence.LRS;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "cyclist")
-//@Table(name = "cyclist", schema = "public", catalog = "Velodrome")
+@Entity
+@Table(name = "cyclist")
 public class Cyclist implements Serializable {
 
     @Id
@@ -17,7 +15,7 @@ public class Cyclist implements Serializable {
     @Column(name = "cyclist_id", nullable = false)
     private int cyclist_id;
 
-    @ManyToOne(targetEntity = com.entity.Team.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(targetEntity = com.entity.Team.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
 
@@ -33,7 +31,7 @@ public class Cyclist implements Serializable {
     @Column(name = "cyclist_age", nullable = true)
     private int cyclist_age;
 
-    @OneToMany(targetEntity = com.entity.Bicycle.class, fetch = FetchType.LAZY, mappedBy = "cyclist")
+    @OneToMany(targetEntity = com.entity.Bicycle.class, fetch = FetchType.LAZY, mappedBy = "cyclist", cascade = CascadeType.ALL)
     private Set<Bicycle> bicycles = new HashSet<Bicycle>(0);
 
     //private Collection<Bicycle> bicyclesByCyclistId;
@@ -46,9 +44,9 @@ public class Cyclist implements Serializable {
     public Cyclist() {
     }
 
-    public Cyclist(int cyclist_id,int team_id, String cyclist_name, int cyclist_age) {
+    public Cyclist(int cyclist_id, Team team, String cyclist_name, int cyclist_age) {
         this.cyclist_id = cyclist_id;
-        //this.team_id = team_id;
+        this.team = team;
         this.cyclist_name = cyclist_name;
         this.cyclist_age = cyclist_age;
     }

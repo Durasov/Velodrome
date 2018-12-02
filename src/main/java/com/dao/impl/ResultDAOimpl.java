@@ -47,12 +47,26 @@ public class ResultDAOimpl implements ResultDAO {
         }
     }
 
+    public void updateResult(Result result){
+        ORMHelper.openSession();
+        try {
+            ORMHelper.beginTransaction();
+            ORMHelper.update(result);
+            ORMHelper.commitTransaction();
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
+    }
+
     public List<Result> getResults(){
         ORMHelper.openSession();
         List<Result> results = new ArrayList<>();
         try {
             ORMHelper.beginTransaction();
-            Query query = ORMHelper.getCurrentSession().createQuery("SELECT r FROM result r ORDER BY r.result_place");
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT r FROM Result r ORDER BY r.result_place");
             results = query.getResultList();
             ORMHelper.commitTransaction();
         } catch (RuntimeException ex) {

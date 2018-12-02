@@ -14,4 +14,6 @@ public interface TeamDAO {
 
     public Team getTeam(String team_name);
 
+    public Team getTeam(int team_id);
+
 }

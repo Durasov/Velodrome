@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class StartPageController {
 
-    @RequestMapping(value = { "/index**" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/", "/index**" }, method = RequestMethod.GET)
     public ModelAndView welcomePage() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security Custom Login Form");
@@ -47,7 +47,7 @@ public class StartPageController {
 
     }
 
-    @RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/login" }, method = RequestMethod.GET)
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
 

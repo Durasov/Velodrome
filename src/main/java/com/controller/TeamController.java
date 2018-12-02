@@ -52,4 +52,28 @@ public class TeamController {
         return model;
     }
 
+    @RequestMapping(value = "/editTeam", method = RequestMethod.GET, params = {"teamId"})
+    @ResponseBody
+    public ModelAndView showEditForm(@RequestParam(value = "teamId") int teamId){
+        Team team;
+        TeamDAO teamDAO = new TeamDAOimpl();
+        team = teamDAO.getTeam(teamId);
+        ModelAndView model = new ModelAndView("editTeam","command", new Team());
+        model.addObject("teamToEdit",team);
+        //return new ModelAndView("editTeam","command", new Team());
+        return model;
+    }
+
+    @RequestMapping(value = "/updateTeam", method = RequestMethod.POST, params = {"team_name", "team_country"})
+    @ResponseBody
+    public ModelAndView editTeamPage(@RequestParam(value = "team_name") String team_name,
+                                    @RequestParam(value = "team_country") String team_country){
+        TeamDAO teamDAO = new TeamDAOimpl();
+        Team team = new Team(team_name,team_country);
+        ((TeamDAOimpl) teamDAO).updateTeam(team);
+        ModelAndView model = new ModelAndView("teams");
+        model.addObject("teams",teamDAOimpl.getTeams());
+        return model;
+    }
+
 }

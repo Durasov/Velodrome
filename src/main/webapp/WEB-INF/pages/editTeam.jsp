@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
-  Date: 30.11.2018
-  Time: 12:33
+  Date: 02.12.2018
+  Time: 19:32
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Velodrome bicycles</title>
+    <title>Edit Team</title>
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
     <link rel="stylesheet" type="text/css" href="resources/style2.css"/>
 </head>
@@ -38,37 +38,16 @@
     </nav>
 </header>
 
-<table class="table" align="center">
-    <thead>
-    <th>Cyclist name</th>
-    <th>Bicycle model</th>
-    <th>Material</th>
-    <th>Weight</th>
-    <th></th>
-    <th></th>
-    </thead>
-    <tbody>
-    <c:forEach items="${bicycles}" var="bicycle">
-    <tr>
-        <td>${bicycle.getCyclist().getCyclistName()}
-        </td>
-        <td>${bicycle.bicycleName}
-        </td>
-        <td>${bicycle.bicycleMaterial}
-        </td>
-        <td>${bicycle.bicycleWeight}
-        </td>
-        <td><a href="/editBicycle?bicycleId=${bicycle.bicycleId}">Edit</a></td>
-        <td><a href="/deleteBicycle?bicycleId=${bicycle.bicycleId}">Delete</a></td>
-    </tr>
-    </tbody>
-    </c:forEach>
-</table>
 <div class="description">
-    <c:forEach items="${bicycles}" var="bicycle" begin="0" end="0">
-        <a href="/addBicycle?bicycleId=${bicycle.bicycleId}" class="add_button">Add bicycle</a>
-    </c:forEach>
+    <form:form action="updateTeam" method="post" class="form">
+        <h2>${teamToEdit.teamName}</h2>
+        <p class="add_description">Name</p>
+        <input id="changeName" name="team_name" required type="text" value="${teamToEdit.teamName}" class="textbox"> </br>
+        <p class="add_description">Country</p>
+        <input id="chaneCountry" name="team_country" required type="text" value="${teamToEdit.teamCountry}" class="textbox"> </br>
+        <input id="submitButton" type="submit" value="Accept" class="button"/>
+        <a href="/teams" class="cancel">Cancel</a>
+    </form:form>
 </div>
-</form>
 </body>
 </html>

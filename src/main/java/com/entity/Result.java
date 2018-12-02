@@ -3,7 +3,8 @@ package com.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity(name = "result")
+@Entity
+@Table(name = "result")
 //@Table(name = "result", schema = "public", catalog = "Velodrome")
 public class Result implements Serializable{
 

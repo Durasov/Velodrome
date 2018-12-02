@@ -46,12 +46,26 @@ public class CyclistDAOimpl implements CyclistDAO {
         }
     }
 
+    public void updateCyclist(Cyclist cyclist){
+        ORMHelper.openSession();
+        try {
+            ORMHelper.beginTransaction();
+            ORMHelper.update(cyclist);
+            ORMHelper.commitTransaction();
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
+    }
+
     public List<Cyclist> getCyclists(){
         ORMHelper.openSession();
         List<Cyclist> cyclists = new ArrayList<>();
         try {
             ORMHelper.beginTransaction();
-            Query query = ORMHelper.getCurrentSession().createQuery("SELECT c FROM cyclist c ORDER BY c.cyclist_name");
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT c FROM Cyclist c ORDER BY c.cyclist_name");
             cyclists = query.getResultList();
             ORMHelper.commitTransaction();
         } catch (RuntimeException ex) {
@@ -61,5 +75,28 @@ public class CyclistDAOimpl implements CyclistDAO {
             ORMHelper.closeSession();
         }
         return cyclists;
+    }
+
+    public Cyclist getCyclist(String cyclistName){
+        ORMHelper.openSession();
+        List<Cyclist> cyclists = new ArrayList<>();
+        try {
+            ORMHelper.beginTransaction();
+            Cyclist cyclist;
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT c FROM Cyclist c where c.cyclist_name LIKE: param")
+                    .setParameter("param",cyclistName);
+            cyclists = query.getResultList();
+            Team team = cyclists.get(0).getTeam();
+            String cyclist_name = cyclists.get(0).getCyclistName();
+            int cyclist_age = cyclists.get(0).getCyclistAge();
+            cyclist = new Cyclist(team,cyclist_name,cyclist_age);
+            ORMHelper.commitTransaction();
+            return cyclist;
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
     }
 }
