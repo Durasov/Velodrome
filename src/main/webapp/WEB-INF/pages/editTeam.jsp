@@ -9,9 +9,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Edit Team</title>
+    <title>Velodrome</title>
+    <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
-    <link rel="stylesheet" type="text/css" href="resources/style2.css"/>
 </head>
 <body>
 <header class="header">

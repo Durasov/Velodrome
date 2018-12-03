@@ -14,7 +14,7 @@ a:visited {
 /* Стили для header */
 .header{
     height: 120px;
-    background-image: url('//resources/img/Deep Space.jpg');
+    background-image: url('../resources/img/Deep Space.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -181,4 +181,40 @@ input:focus{
     background:0;
     cursor:pointer;
     transition:all .3s
+}
+
+.table{
+    margin-top: 50px;
+}
+
+.cancel{
+    padding:8px 12px;
+    margin:8px 0 0;
+    margin-left: 100px;
+    font-family:'Montserrat',sans-serif;
+    border:2px solid #78788c;
+    font-size: 17px;
+    color: white;
+    background:0;
+    cursor:pointer;
+    transition:all .3s
+}
+
+.add_description{
+    color: white;
+    margin: 0;
+}
+
+input{
+    color: white;
+    font-size: 17px;
+}
+
+.add_select{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    background:#3B3B3B;
+    color: white;
 }

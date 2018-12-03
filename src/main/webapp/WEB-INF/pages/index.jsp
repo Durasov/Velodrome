@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<c:url var="imgUrl" value="//resources/img/night_race.jpg" />
 <html>
 <head>
     <title>Velodrome</title>
+    <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
 
 </head>
@@ -22,7 +22,7 @@
     <nav class="nav_item">
         <ul class="nav_ul">
             <li class="nav_li">
-                <a href="/index.jsp" class="nav_link nav_link1"> News </a>
+                <a href="/index" class="nav_link nav_link1"> News </a>
             </li>
             <li class="nav_li">
                 <a href="/teams" class="nav_link nav_link2"> Teams </a>
@@ -43,7 +43,7 @@
     <ul class="news_ul">
         <li class="news1_li">
             <div class="news1">
-                <img src="${imgUrl}" alt="" class="news1_img">
+                <img src="resources/img/night_race.jpg" alt="" class="news1_img">
                 <div class="news_description">
                     <p class="news_text">What will happen in April of 2018? This month in Russia will be rich in only one race under the auspices of the FVSR, this is the championship of Russia and All-Russian competitions that will be held on 24-27 in Moscow.</p>
                 </div>

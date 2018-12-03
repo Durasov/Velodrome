@@ -7,11 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 <html>
 <head>
-    <title>Velodrome Teams</title>
+    <title>Velodrome</title>
+    <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
-    <link rel="stylesheet" type="text/css" href="resources/style2.css"/>
 </head>
 <body>
 <header class="header">

@@ -45,6 +45,42 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/403");
 
+        http.authorizeRequests().antMatchers("/teams/**")
+                .access("hasRole('ROLE_ADMIN')").and().formLogin()
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout().logoutSuccessUrl("/login?logout")
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/403");
+
+        http.authorizeRequests().antMatchers("/cyclists/**")
+                .access("hasRole('ROLE_ADMIN')").and().formLogin()
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout().logoutSuccessUrl("/login?logout")
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/403");
+
+        http.authorizeRequests().antMatchers("/bicycles/**")
+                .access("hasRole('ROLE_ADMIN')").and().formLogin()
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout().logoutSuccessUrl("/login?logout")
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/403");
+
+        http.authorizeRequests().antMatchers("/results/**")
+                .access("hasRole('ROLE_ADMIN')").and().formLogin()
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and().logout().logoutSuccessUrl("/login?logout")
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/403");
+
         http.authorizeRequests().antMatchers("/resources/**").permitAll().anyRequest().permitAll();
     }
 

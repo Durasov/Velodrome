@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,11 +52,16 @@ public class CyclistController {
     @RequestMapping(value = "/saveCyclist", method = RequestMethod.POST, params = {"cyclist_name", "teamSelector", "cyclist_age"})
     @ResponseBody
     public ModelAndView addCyclistPage(@RequestParam(value = "cyclist_name") String cyclist_name,
-                                    @RequestParam(value = "teamSelector") String team_name,
-                                    @RequestParam(value = "cyclist_age") int cyclist_age) {
+                                       @RequestParam(value = "teamSelector") String team_name,
+                                       @RequestParam(value = "cyclist_age") int cyclist_age) {
         Team team;
         TeamDAO teamDAO = new TeamDAOimpl();
         team = teamDAO.getTeam(team_name);
+
+/*        String requestEnc = "ISO-8859-1";
+        if(clientEnc==null) clientEnc="Cp1251";
+        cyclist_name = new String(cyclist_name.getBytes(requestEnc), clientEnc);*/
+
         CyclistDAO cyclistDAO = new CyclistDAOimpl();
         cyclistDAO.createCyclist(team,cyclist_name,cyclist_age);
         ModelAndView model = new ModelAndView("cyclists");

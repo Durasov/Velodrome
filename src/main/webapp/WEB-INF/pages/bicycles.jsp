@@ -9,9 +9,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Velodrome bicycles</title>
+    <title>Velodrome</title>
+    <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
-    <link rel="stylesheet" type="text/css" href="resources/style2.css"/>
 </head>
 <body>
 <header class="header">

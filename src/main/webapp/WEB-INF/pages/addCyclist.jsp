@@ -5,14 +5,15 @@
   Time: 13:30
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Add Cyclist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Velodrome</title>
+    <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="resources/style.css"/>
-    <link rel="stylesheet" type="text/css" href="resources/style2.css"/>
 </head>
 <body>
 <header class="header">
