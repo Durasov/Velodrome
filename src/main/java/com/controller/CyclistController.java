@@ -69,5 +69,35 @@ public class CyclistController {
         return model;
     }
 
+    @RequestMapping(value = "/editCyclist", method = RequestMethod.GET, params = {"cyclistId"})
+    @ResponseBody
+    public ModelAndView showEditForm(@RequestParam(value = "cyclistId") int cyclistId){
+        //Cyclist cyclist;
+        CyclistDAO cyclistDAO = new CyclistDAOimpl();
+        Cyclist cyclist = ((CyclistDAOimpl) cyclistDAO).getCyclist(cyclistId);
+        TeamDAO teamDAO = new TeamDAOimpl();
+        ModelAndView model = new ModelAndView("editCyclist","command", new Cyclist());
+        model.addObject("cyclistToEdit",cyclist);
+        model.addObject("teams",teamDAO.getTeams());
+        return model;
+    }
+
+    @RequestMapping(value = "/updateCyclist", method = RequestMethod.POST, params = {"cyclistId", "teamSelector", "cyclist_name", "cyclist_age"})
+    @ResponseBody
+    public ModelAndView editCyclistPage(@RequestParam(value = "cyclistId") int cyclistId,
+                                        @RequestParam(value = "teamSelector") String team_name,
+                                        @RequestParam(value = "cyclist_name") String cyclist_name,
+                                        @RequestParam(value = "cyclist_age") int cyclist_age){
+        CyclistDAO cyclistDAO = new CyclistDAOimpl();
+        TeamDAO teamDAO = new TeamDAOimpl();
+        Team team = teamDAO.getTeam(team_name);
+        Cyclist cyclist = new Cyclist(cyclistId, team, cyclist_name, cyclist_age);
+        cyclistDAO.updateCyclist(cyclist);
+        ((TeamDAOimpl) teamDAO).updateTeam(team);
+        ModelAndView model = new ModelAndView("cyclists");
+        model.addObject("cyclists",cyclistDAOimpl.getCyclists());
+        return model;
+    }
+
 }
 

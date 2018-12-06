@@ -49,7 +49,10 @@ public class TeamDAOimpl implements TeamDAO {
         ORMHelper.openSession();
         try {
             ORMHelper.beginTransaction();
-            ORMHelper.update(team);
+            Team updatedTeam = (Team) ORMHelper.retrieve(Team.class,team.getTeamId());
+            updatedTeam.setTeamName(team.getTeamName());
+            updatedTeam.setTeamCountry(team.getTeamCountry());
+            //ORMHelper.update(team);
             ORMHelper.commitTransaction();
         } catch (RuntimeException ex) {
             ORMHelper.rollbackTransaction();
@@ -87,9 +90,10 @@ public class TeamDAOimpl implements TeamDAO {
             Query query = ORMHelper.getCurrentSession().createQuery("SELECT t FROM Team t where t.team_name LIKE: param")
                     .setParameter("param",teamName);
             teams = query.getResultList();
+            int team_id = teams.get(0).getTeamId();
             String team_name = teams.get(0).getTeamName();
             String team_country = teams.get(0).getTeamCountry();
-            team = new Team(team_name,team_country);
+            team = new Team(team_id,team_name,team_country);
             ORMHelper.commitTransaction();
             return team;
         } catch (RuntimeException ex) {
@@ -109,9 +113,10 @@ public class TeamDAOimpl implements TeamDAO {
             Query query = ORMHelper.getCurrentSession().createQuery("SELECT t FROM Team t where t.team_id =: param")
                     .setParameter("param",team_id);
             teams = query.getResultList();
+            int teamId = teams.get(0).getTeamId();
             String team_name = teams.get(0).getTeamName();
             String team_country = teams.get(0).getTeamCountry();
-            team = new Team(team_name,team_country);
+            team = new Team(teamId,team_name,team_country);
             ORMHelper.commitTransaction();
             return team;
         } catch (RuntimeException ex) {

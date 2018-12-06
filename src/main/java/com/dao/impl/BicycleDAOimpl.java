@@ -17,11 +17,13 @@ public class BicycleDAOimpl implements BicycleDAO {
         ORMHelper.openSession();
         try {
             ORMHelper.beginTransaction();
-            Bicycle bicycle = new Bicycle();
+            /*Bicycle bicycle = new Bicycle();
             bicycle.setCyclist(cyclist);
             bicycle.setBicycleName(bicycle_name);
             bicycle.setBicycleMaterial(bicycle_material);
-            bicycle.setBicycleWeight(bicycle_weight);
+            bicycle.setBicycleWeight(bicycle_weight);*/
+
+            Bicycle bicycle = new Bicycle(cyclist, bicycle_name, bicycle_material, bicycle_weight);
 
             ORMHelper.create(bicycle);
             ORMHelper.commitTransaction();

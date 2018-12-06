@@ -14,7 +14,7 @@ a:visited {
 /* Стили для header */
 .header{
     height: 120px;
-    background-image: url('../resources/img/Deep Space.jpg');
+    background-image: url('../img/Deep Space.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }

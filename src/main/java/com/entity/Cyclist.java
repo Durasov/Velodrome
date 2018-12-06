@@ -15,13 +15,9 @@ public class Cyclist implements Serializable {
     @Column(name = "cyclist_id", nullable = false)
     private int cyclist_id;
 
-    @ManyToOne(targetEntity = com.entity.Team.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = com.entity.Team.class, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private Team team;
-
-    //private Team cyclistsByTeamId;
-
-    //private int team_id;
 
     @Basic
     @Column(name = "cyclist_name", nullable = true, length = 40)
@@ -31,15 +27,11 @@ public class Cyclist implements Serializable {
     @Column(name = "cyclist_age", nullable = true)
     private int cyclist_age;
 
-    @OneToMany(targetEntity = com.entity.Bicycle.class, fetch = FetchType.LAZY, mappedBy = "cyclist", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = com.entity.Bicycle.class, mappedBy = "cyclist", cascade = CascadeType.ALL)
     private Set<Bicycle> bicycles = new HashSet<Bicycle>(0);
-
-    //private Collection<Bicycle> bicyclesByCyclistId;
 
     @OneToMany(targetEntity = com.entity.Result.class, fetch = FetchType.LAZY, mappedBy = "cyclist")
     private Set<Result> results = new HashSet<Result>(0);
-
-    //private Collection<Result> resultsByCyclistId;
 
     public Cyclist() {
     }
@@ -73,16 +65,6 @@ public class Cyclist implements Serializable {
         this.team = team;
     }
 
-/*    @ManyToOne
-    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
-    public Team getCyclistsByTeamId() {
-        return cyclistsByTeamId;
-    }
-
-    public void setCyclistsByTeamId(Team cyclistsByTeamId) {
-        this.cyclistsByTeamId = cyclistsByTeamId;
-    }*/
-
     public String getCyclistName() {
         return cyclist_name;
     }
@@ -98,23 +80,6 @@ public class Cyclist implements Serializable {
     public void setCyclistAge(int cyclist_age) {
         this.cyclist_age = cyclist_age;
     }
-
-/*    public int getTeamId() {
-        return team_id;
-    }
-
-    public void setTeamId(int team_id) {
-        this.team_id = team_id;
-    }*/
-
-/*    @OneToMany(mappedBy = "bicyclesByCyclistId")
-    public Collection<Bicycle> getBicyclesByCyclistId() {
-        return bicyclesByCyclistId;
-    }
-
-    public void setBicyclesByCyclistId(Collection<Bicycle> bicyclesByCyclistId) {
-        this.bicyclesByCyclistId = bicyclesByCyclistId;
-    }*/
 
     public Set<Bicycle> getBicycles(){
         return this.bicycles;
@@ -132,12 +97,4 @@ public class Cyclist implements Serializable {
         this.results = results;
     }
 
-/*    @OneToMany(mappedBy = "resultsByCyclistId")
-    public Collection<Result> getResultsByCyclistId() {
-        return resultsByCyclistId;
-    }
-
-    public void setResultsByCyclistId(Collection<Result> resultsByCyclistId) {
-        this.resultsByCyclistId = resultsByCyclistId;
-    }*/
 }

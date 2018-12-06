@@ -12,7 +12,7 @@
 <head>
     <title>Velodrome</title>
     <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="resources/style.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
 </head>
 <body>
 <header class="header">

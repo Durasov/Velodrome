@@ -18,22 +18,15 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 
     <properties>
         <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
-        <!-- enable warnings for debugging -->
-        <!--<property name="openjpa.Log" value="DefaultLevel=TRACE, Runtime=INFO, Tool=INFO, SQL=TRACE"/>-->
-        <!-- connection properties -->
         <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/Velodrome"/>
         <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
         <property name="openjpa.ConnectionUserName" value="postgres"/>
         <property name="openjpa.ConnectionPassword" value="home060658"/>
         <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE" />
 
-        <!-- Generic JPA configuration attributes -->
-        <!--<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />-->
-        <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />-->
-        <!--<property name="javax.persistence.schema-generation.create-database-schemas" value="true" />-->
 
         <!-- OpenJPA specific configuration attributes -->
-        <!--<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict" />-->
+        <property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict" />
         <property name="openjpa.DynamicEnhancementAgent" value="false"/>
         <property name="openjpa.RuntimeUnenhancedClasses" value="supported" />
 

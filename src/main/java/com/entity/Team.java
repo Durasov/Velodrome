@@ -1,15 +1,12 @@
 package com.entity;
 
-import org.apache.openjpa.persistence.jdbc.*;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "team")
-//@Table(name = "team", schema = "public", catalog = "Velodrome")
 public class Team implements Serializable {
 
     @Id
@@ -25,14 +22,11 @@ public class Team implements Serializable {
     @Column(name = "team_country", nullable = true, length = 20)
     private String team_country;
 
-    @OneToMany(targetEntity = com.entity.Cyclist.class, fetch = FetchType.LAZY, mappedBy = "team", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = com.entity.Cyclist.class, mappedBy = "team", cascade = CascadeType.ALL)
     private Set<Cyclist> cyclists = new HashSet<Cyclist>(0);
 
     @OneToMany(targetEntity = com.entity.Result.class, fetch = FetchType.LAZY, mappedBy = "team")
     private Set<Result> results = new HashSet<Result>(0);
-
-    //private Collection<Cyclist> cyclistsByTeamId;
-    //private Collection<Result> resultsByTeamId;
 
     public Team() {
     }
@@ -87,23 +81,5 @@ public class Team implements Serializable {
     public void setResults(Set<Result> results){
         this.results = results;
     }
-
-/*    @OneToMany(mappedBy = "cyclistsByTeamId")
-    public Collection<Cyclist> getCyclistsByTeamId() {
-        return cyclistsByTeamId;
-    }
-
-    public void setCyclistsByTeamId(Collection<Cyclist> cyclistsByTeamId) {
-        this.cyclistsByTeamId = cyclistsByTeamId;
-    }*/
-
-/*    @OneToMany(mappedBy = "resultsByTeamId")
-    public Collection<Result> getResultsByTeamId() {
-        return resultsByTeamId;
-    }
-
-    public void setResultsByTeamId(Collection<Result> resultsByTeamId) {
-        this.resultsByTeamId = resultsByTeamId;
-    }*/
 
 }

@@ -15,4 +15,8 @@ public interface CyclistDAO {
 
     public List<Cyclist> getCyclists();
 
+    public Cyclist getCyclist(String cyclistName);
+
+    public Cyclist getCyclist(int cyclistId);
+
 }

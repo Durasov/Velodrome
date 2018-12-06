@@ -64,12 +64,13 @@ public class TeamController {
         return model;
     }
 
-    @RequestMapping(value = "/updateTeam", method = RequestMethod.POST, params = {"team_name", "team_country"})
+    @RequestMapping(value = "/updateTeam", method = RequestMethod.POST, params = {"teamId", "team_name", "team_country"})
     @ResponseBody
-    public ModelAndView editTeamPage(@RequestParam(value = "team_name") String team_name,
-                                    @RequestParam(value = "team_country") String team_country){
+    public ModelAndView editTeamPage(@RequestParam(value = "teamId") int teamId,
+                                     @RequestParam(value = "team_name") String team_name,
+                                     @RequestParam(value = "team_country") String team_country){
         TeamDAO teamDAO = new TeamDAOimpl();
-        Team team = new Team(team_name,team_country);
+        Team team = new Team(teamId,team_name,team_country);
         ((TeamDAOimpl) teamDAO).updateTeam(team);
         ModelAndView model = new ModelAndView("teams");
         model.addObject("teams",teamDAOimpl.getTeams());

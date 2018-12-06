@@ -50,7 +50,10 @@ public class CyclistDAOimpl implements CyclistDAO {
         ORMHelper.openSession();
         try {
             ORMHelper.beginTransaction();
-            ORMHelper.update(cyclist);
+            Cyclist updatedCyclist = (Cyclist) ORMHelper.retrieve(Cyclist.class,cyclist.getCyclistId());
+            updatedCyclist.setCyclistName(cyclist.getCyclistName());
+            updatedCyclist.setCyclistAge(cyclist.getCyclistAge());
+            updatedCyclist.setTeam(cyclist.getTeam());
             ORMHelper.commitTransaction();
         } catch (RuntimeException ex) {
             ORMHelper.rollbackTransaction();
@@ -86,10 +89,35 @@ public class CyclistDAOimpl implements CyclistDAO {
             Query query = ORMHelper.getCurrentSession().createQuery("SELECT c FROM Cyclist c where c.cyclist_name LIKE: param")
                     .setParameter("param",cyclistName);
             cyclists = query.getResultList();
+            int cyclist_id = cyclists.get(0).getCyclistId();
             Team team = cyclists.get(0).getTeam();
             String cyclist_name = cyclists.get(0).getCyclistName();
             int cyclist_age = cyclists.get(0).getCyclistAge();
-            cyclist = new Cyclist(team,cyclist_name,cyclist_age);
+            cyclist = new Cyclist(cyclist_id, team, cyclist_name, cyclist_age);
+            ORMHelper.commitTransaction();
+            return cyclist;
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
+    }
+
+    public Cyclist getCyclist(int cyclistId){
+        ORMHelper.openSession();
+        List<Cyclist> cyclists = new ArrayList<>();
+        try {
+            ORMHelper.beginTransaction();
+            Cyclist cyclist;
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT c FROM Cyclist c where c.cyclist_id =: param")
+                    .setParameter("param",cyclistId);
+            cyclists = query.getResultList();
+            int cyclist_id = cyclists.get(0).getCyclistId();
+            Team team = cyclists.get(0).getTeam();
+            String cyclist_name = cyclists.get(0).getCyclistName();
+            int cyclist_age = cyclists.get(0).getCyclistAge();
+            cyclist = new Cyclist(cyclist_id, team, cyclist_name, cyclist_age);
             ORMHelper.commitTransaction();
             return cyclist;
         } catch (RuntimeException ex) {

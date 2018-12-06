@@ -11,7 +11,7 @@
 <head>
     <title>Velodrome</title>
     <link rel="shortcut icon" href="resources/img/chain.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="resources/style.css"/>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css"/>
 </head>
 <body>
 <header class="header">
@@ -39,7 +39,7 @@
 </header>
 
 <div class="description">
-    <form:form action="updateTeam" method="post" class="form">
+    <form:form action="updateTeam?teamId=${teamToEdit.teamId}" method="post" class="form">
         <h2>${teamToEdit.teamName}</h2>
         <p class="add_description">Name</p>
         <input id="changeName" name="team_name" required type="text" value="${teamToEdit.teamName}" class="textbox"> </br>
