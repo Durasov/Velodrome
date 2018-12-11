@@ -93,7 +93,6 @@ public class CyclistController {
         Team team = teamDAO.getTeam(team_name);
         Cyclist cyclist = new Cyclist(cyclistId, team, cyclist_name, cyclist_age);
         cyclistDAO.updateCyclist(cyclist);
-        ((TeamDAOimpl) teamDAO).updateTeam(team);
         ModelAndView model = new ModelAndView("cyclists");
         model.addObject("cyclists",cyclistDAOimpl.getCyclists());
         return model;

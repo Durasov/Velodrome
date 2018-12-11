@@ -31,9 +31,9 @@ public class Bicycle implements Serializable {
     public Bicycle() {
     }
 
-    public Bicycle(int bicycle_id, int cyclist_id, String bicycle_name, String bicycle_material, byte bicycle_weight) {
+    public Bicycle(int bicycle_id, Cyclist cyclist, String bicycle_name, String bicycle_material, byte bicycle_weight) {
         this.bicycle_id = bicycle_id;
-        //this.cyclist_id = cyclist_id;
+        this.cyclist = cyclist;
         this.bicycle_name = bicycle_name;
         this.bicycle_material = bicycle_material;
         this.bicycle_weight = bicycle_weight;

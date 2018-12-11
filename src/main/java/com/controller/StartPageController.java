@@ -35,13 +35,13 @@ public class StartPageController {
         return model;
     }
 
-    @RequestMapping(value = { "/test", "/test**" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/react", "/react**" }, method = RequestMethod.GET)
     public ModelAndView testPage() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security Custom Login Form");
         model.addObject("message", "This is welcome page!");
 
-        model.setViewName("test");
+        model.setViewName("react");
         return model;
     }
 

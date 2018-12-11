@@ -50,9 +50,9 @@
     <tbody>
     <c:forEach items="${results}" var="result">
     <tr>
-        <td>${cyclistDao.getCyclist(result.getCyclistId()).getCyclistName()}
+        <td>${result.getCyclist().getCyclistName()}
         </td>
-        <td>${teamDao.getTeam(result.getTeamId()).getTeamName()}
+        <td>${result.getTeam().getTeamName()}
         </td>
         <td>${result.raceType}
         </td>

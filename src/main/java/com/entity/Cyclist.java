@@ -30,7 +30,7 @@ public class Cyclist implements Serializable {
     @OneToMany(targetEntity = com.entity.Bicycle.class, mappedBy = "cyclist", cascade = CascadeType.ALL)
     private Set<Bicycle> bicycles = new HashSet<Bicycle>(0);
 
-    @OneToMany(targetEntity = com.entity.Result.class, fetch = FetchType.LAZY, mappedBy = "cyclist")
+    @OneToMany(targetEntity = com.entity.Result.class, mappedBy = "cyclist", cascade = CascadeType.ALL)
     private Set<Result> results = new HashSet<Result>(0);
 
     public Cyclist() {

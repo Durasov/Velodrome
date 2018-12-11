@@ -63,5 +63,34 @@ public class BicycleController {
         return model;
     }
 
+    @RequestMapping(value = "/editBicycle", method = RequestMethod.GET, params = {"bicycleId"})
+    @ResponseBody
+    public ModelAndView showEditForm(@RequestParam(value = "bicycleId") int bicycleId){
+        BicycleDAO bicycleDAO = new BicycleDAOimpl();
+        CyclistDAO cyclistDAO = new CyclistDAOimpl();
+        Bicycle bicycle = ((BicycleDAOimpl) bicycleDAO).getBicycle(bicycleId);
+        ModelAndView model = new ModelAndView("editBicycle","command", new Bicycle());
+        model.addObject("bicycleToEdit",bicycle);
+        model.addObject("cyclists",cyclistDAO.getCyclists());
+        return model;
+    }
+
+    @RequestMapping(value = "/updateBicycle", method = RequestMethod.POST, params = {"bicycleId", "cyclistSelector", "bicycle_name", "bicycle_material", "bicycle_weight"})
+    @ResponseBody
+    public ModelAndView editCyclistPage(@RequestParam(value = "bicycleId") int bicycleId,
+                                        @RequestParam(value = "cyclistSelector") String cyclist_name,
+                                        @RequestParam(value = "bicycle_name") String bicycle_name,
+                                        @RequestParam(value = "bicycle_material") String bicycle_material,
+                                        @RequestParam(value = "bicycle_weight") byte bicycle_weight){
+        BicycleDAO bicycleDAO = new BicycleDAOimpl();
+        CyclistDAO cyclistDAO = new CyclistDAOimpl();
+        Cyclist cyclist = cyclistDAO.getCyclist(cyclist_name);
+        Bicycle bicycle = new Bicycle(bicycleId, cyclist, bicycle_name, bicycle_material, bicycle_weight);
+        bicycleDAO.updateBicycle(bicycle);
+        ModelAndView model = new ModelAndView("bicycles");
+        model.addObject("bicycles",bicycleDAOimpl.getBicycles());
+        return model;
+    }
+
 }
 

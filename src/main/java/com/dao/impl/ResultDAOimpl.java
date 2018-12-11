@@ -3,6 +3,7 @@ package com.dao.impl;
 import com.dao.ResultDAO;
 import com.entity.Cyclist;
 import com.entity.Result;
+import com.entity.Team;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -12,13 +13,13 @@ import java.util.List;
 @Repository
 public class ResultDAOimpl implements ResultDAO {
 
-    public void createResult(int team_id, int cyclist_id, String race_type, int result_place) {
+    public void createResult(Team team, Cyclist cyclist, String race_type, int result_place) {
         ORMHelper.openSession();
         try {
             ORMHelper.beginTransaction();
             Result result = new Result();
-            //result.setTeamId(team_id);
-            //result.setCyclistId(cyclist_id);
+            result.setTeam(team);
+            result.setCyclist(cyclist);
             result.setRaceType(race_type);
             result.setResultPlace(result_place);
 
@@ -51,7 +52,12 @@ public class ResultDAOimpl implements ResultDAO {
         ORMHelper.openSession();
         try {
             ORMHelper.beginTransaction();
-            ORMHelper.update(result);
+            Result updatedResult = (Result) ORMHelper.retrieve(Result.class,result.getResultId());
+            updatedResult.setTeam(result.getTeam());
+            updatedResult.setCyclist(result.getCyclist());
+            updatedResult.setRaceType(result.getRaceType());
+            updatedResult.setResultPlace(result.getResultPlace());
+
             ORMHelper.commitTransaction();
         } catch (RuntimeException ex) {
             ORMHelper.rollbackTransaction();
@@ -76,6 +82,31 @@ public class ResultDAOimpl implements ResultDAO {
             ORMHelper.closeSession();
         }
         return results;
+    }
+
+    public Result getResult(int resultId){
+        ORMHelper.openSession();
+        List<Result> results = new ArrayList<>();
+        try {
+            ORMHelper.beginTransaction();
+            Result result;
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT r FROM Result r where r.result_id =: param")
+                    .setParameter("param",resultId);
+            results = query.getResultList();
+            int result_id = results.get(0).getResultId();
+            Cyclist cyclist = results.get(0).getCyclist();
+            Team team = results.get(0).getTeam();
+            String race_type = results.get(0).getRaceType();
+            int result_place = results.get(0).getResultPlace();
+            result = new Result(result_id , team, cyclist, race_type, result_place);
+            ORMHelper.commitTransaction();
+            return result;
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
     }
 
 }

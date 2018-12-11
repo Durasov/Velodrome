@@ -25,7 +25,7 @@ public class Team implements Serializable {
     @OneToMany(targetEntity = com.entity.Cyclist.class, mappedBy = "team", cascade = CascadeType.ALL)
     private Set<Cyclist> cyclists = new HashSet<Cyclist>(0);
 
-    @OneToMany(targetEntity = com.entity.Result.class, fetch = FetchType.LAZY, mappedBy = "team")
+    @OneToMany(targetEntity = com.entity.Result.class, mappedBy = "team", cascade = CascadeType.ALL)
     private Set<Result> results = new HashSet<Result>(0);
 
     public Team() {

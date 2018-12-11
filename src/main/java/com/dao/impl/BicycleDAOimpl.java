@@ -54,7 +54,12 @@ public class BicycleDAOimpl implements BicycleDAO {
         ORMHelper.openSession();
         try {
             ORMHelper.beginTransaction();
-            ORMHelper.update(bicycle);
+            Bicycle updatedBicycle = (Bicycle) ORMHelper.retrieve(Bicycle.class,bicycle.getBicycleId());
+            updatedBicycle.setBicycleName(bicycle.getBicycleName());
+            updatedBicycle.setCyclist(bicycle.getCyclist());
+            updatedBicycle.setBicycleMaterial(bicycle.getBicycleMaterial());
+            updatedBicycle.setBicycleWeight(bicycle.getBicycleWeight());
+
             ORMHelper.commitTransaction();
         } catch (RuntimeException ex) {
             ORMHelper.rollbackTransaction();
@@ -79,6 +84,56 @@ public class BicycleDAOimpl implements BicycleDAO {
             ORMHelper.closeSession();
         }
         return bicycles;
+    }
+
+    public Bicycle getBicycle(String bicycleName){
+        ORMHelper.openSession();
+        List<Bicycle> bicycles = new ArrayList<>();
+        try {
+            ORMHelper.beginTransaction();
+            Bicycle bicycle;
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT b FROM Bicycle b where b.bicycle_name LIKE: param")
+                    .setParameter("param",bicycleName);
+            bicycles = query.getResultList();
+            int bicycle_id = bicycles.get(0).getBicycleId();
+            Cyclist cyclist = bicycles.get(0).getCyclist();
+            String bicycle_name = bicycles.get(0).getBicycleName();
+            String bicycle_material = bicycles.get(0).getBicycleMaterial();
+            byte bicycle_weight = bicycles.get(0).getBicycleWeight();
+            bicycle = new Bicycle(bicycle_id, cyclist, bicycle_name, bicycle_material, bicycle_weight);
+            ORMHelper.commitTransaction();
+            return bicycle;
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
+    }
+
+    public Bicycle getBicycle(int bicycleId){
+        ORMHelper.openSession();
+        List<Bicycle> bicycles = new ArrayList<>();
+        try {
+            ORMHelper.beginTransaction();
+            Bicycle bicycle;
+            Query query = ORMHelper.getCurrentSession().createQuery("SELECT b FROM Bicycle b where b.bicycle_id =: param")
+                    .setParameter("param",bicycleId);
+            bicycles = query.getResultList();
+            int bicycle_id = bicycles.get(0).getBicycleId();
+            Cyclist cyclist = bicycles.get(0).getCyclist();
+            String bicycle_name = bicycles.get(0).getBicycleName();
+            String bicycle_material = bicycles.get(0).getBicycleMaterial();
+            byte bicycle_weight = bicycles.get(0).getBicycleWeight();
+            bicycle = new Bicycle(bicycle_id, cyclist, bicycle_name, bicycle_material, bicycle_weight);
+            ORMHelper.commitTransaction();
+            return bicycle;
+        } catch (RuntimeException ex) {
+            ORMHelper.rollbackTransaction();
+            throw ex;
+        } finally {
+            ORMHelper.closeSession();
+        }
     }
 
 }
